@@ -1,27 +1,16 @@
 import React ,{Component} from 'react';
 import Location from './Location';
 import WeatherData from './WeatherData';
-import convert from 'convert-units';
+import transformWeather from '../../Services/transformWeather';
+import {api_weather} from '../../constants/api_url';
 import './styles.css';
-import {
-
-    SUN,
-
-} from './../../constants/weather';
-
-const location = "Montevideo,uy";
-const api_key= "5aa90f40f12b6ff7d877c0e62abcf35a";
-const url_base_weather = "http://api.openweathermap.org/data/2.5/weather";
-
-const api_weather = `${url_base_weather}?q=${location}&appid=${api_key}`;
 
 
-const data={
-    temperature: 5,
-    weatherState: SUN,
-    humidity:5,
-    wind: '15 m/s'
-}
+
+
+
+
+
 
 
 class WeatherLocation extends Component{
@@ -30,30 +19,16 @@ class WeatherLocation extends Component{
         super();
         this.state = {
             city: 'Montevideo',
-            data: data,
+            data: null,
         };
     }
-    getTemp = kelvin =>{
-        return convert(kelvin).from("K").to("C").toFixed(2);
-    }
-    getWeatherState = weather_data =>{
-        return SUN;    
-    }
 
-    getData= weather_data => {
-        const{humidity,temp} = weather_data.main;
-        const {speed} = weather_data.wind;
-        const weatherState = this.getWeatherState(weather_data);
-        const temperature = this.getTemp(temp);
-
-        const data = {
-            humidity,
-            temperature,
-            weatherState,
-            wind: `${speed} m/s`,
-        }
-        return data;
+    componentDidMount() {
+        this.handleUpdateClick();
     }
+ 
+    
+
 
     handleUpdateClick = () =>{
         fetch(api_weather).then(resolve =>{
@@ -61,7 +36,7 @@ class WeatherLocation extends Component{
             return resolve.json();
 
         }).then(data =>{
-            const newWeather = this.getData(data);
+            const newWeather = transformWeather(data);
             console.log(data);
             debugger;
             this.setState({
@@ -76,8 +51,10 @@ class WeatherLocation extends Component{
         return(
             <div className="weatherLocationCont">
         <Location city={city}></Location>
-        <WeatherData data={data}></WeatherData>
-        <button onClick={this.handleUpdateClick}>Actualizar</button>
+        {data ?
+         <WeatherData data={data}></WeatherData> :
+         "Cargando..."}
+       
     </div>
         );
     }
