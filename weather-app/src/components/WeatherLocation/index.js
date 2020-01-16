@@ -1,25 +1,22 @@
 import React ,{Component} from 'react';
 import Location from './Location';
+import getUrlWeatherByCity from './../../Services/getUrlWeatherByCity';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import WeatherData from './WeatherData';
+import {PropTypes} from 'prop-types';
 import transformWeather from '../../Services/transformWeather';
-import {api_weather} from '../../constants/api_url';
+
 import './styles.css';
-
-
-
-
-
-
 
 
 
 class WeatherLocation extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        const { city } = props;
         this.state = {
-            city: 'Montevideo',
+            city, 
             data: null,
         };
     }
@@ -32,6 +29,7 @@ class WeatherLocation extends Component{
 
 
     handleUpdateClick = () =>{
+        const api_weather = getUrlWeatherByCity(this.state.city);
         fetch(api_weather).then(resolve =>{
             
             return resolve.json();
@@ -57,10 +55,15 @@ class WeatherLocation extends Component{
          <CircularProgress></CircularProgress>
         }
         
+        
        
     </div>
         );
     }
 };
+
+WeatherLocation.propTypes = {
+    city: PropTypes.string.isRequired,
+}
 
 export default WeatherLocation
