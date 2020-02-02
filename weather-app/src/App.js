@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import LocationList from './components/WeatherLocation/LocationList';
 
@@ -13,24 +13,30 @@ const cities=[
   'Tokio, jpn'
 ];
 
-function App() {
-  
-  const handleSelectedLocation = city => {
-    console.log(`handleSelectedLocation`); 
-  }
- 
-  return (
-    <div className="App">
-        <LocationList 
-              cities={cities} 
-              onSelectedLocation={handleSelectedLocation}
-        
-        />
-    </div>
+class App extends Component {
 
- 
-  );
-  
+  handleSelectionLocation = city => {
+
+    console.log("handleSelectionLocation")
+
+  }
+
+  render() {
+
+    return (
+
+      <div className="App">
+
+        <LocationList cities = {cities} onSelectedLocation = {this.handleSelectionLocation} >       
+
+        </LocationList>
+
+      </div>
+
+    );
+
+  }
+
 }
 
 export default App;

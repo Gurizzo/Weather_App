@@ -36,7 +36,7 @@ class WeatherLocation extends Component{
 
         }).then(data =>{
             const newWeather = transformWeather(data);
-            console.log(data);
+            
             this.setState({
             data:newWeather
             })
@@ -48,7 +48,7 @@ class WeatherLocation extends Component{
         const {onWeatherLocationClick} = this.props;
         const {city,data} = this.state;
         return(
-            <div className="weatherLocationCont" onClick={onWeatherLocationClick}> 
+            <div className="weatherLocationCont" onClick={onWeatherLocationClick} > 
         <Location city={city}></Location>
         {data ?
          <WeatherData data={data}></WeatherData> :
