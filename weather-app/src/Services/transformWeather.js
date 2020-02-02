@@ -27,7 +27,7 @@ import {
         }else if(id<700){
             return SNOW;
         }else if  (id===800){
-            return SUN
+            return SUN;
         }else {
             return CLOUD;
         }
