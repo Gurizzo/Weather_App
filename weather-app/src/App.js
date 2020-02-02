@@ -14,12 +14,23 @@ const cities=[
 ];
 
 function App() {
+  
+  const handleSelectedLocation = city => {
+    console.log(`handleSelectedLocation`); 
+  }
+ 
   return (
     <div className="App">
-     
-      <LocationList cities={cities}/>
+        <LocationList 
+              cities={cities} 
+              onSelectedLocation={handleSelectedLocation}
+        
+        />
     </div>
+
+ 
   );
+  
 }
 
 export default App;
