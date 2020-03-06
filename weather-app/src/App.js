@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import {Grid,Col,Row} from 'react-flexbox-grid';
+import { Grid, Col, Row } from 'react-flexbox-grid';
 import LocationList from './components/WeatherLocation/LocationList';
 
-const cities=[
+const cities = [
 
   'Montevideo,uy',
   'Washington,us',
@@ -31,17 +31,21 @@ class App extends Component {
           Titulo
         </Row>
         <Row>
+
           <Col xs={12} md={6}>
 
-          <LocationList cities = {cities} onSelectedLocation = {this.handleSelectionLocation} />       
+            <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation} />
 
           </Col>
-          <Col xs={12} md={6}></Col>
-          <div className="details"></div>
+
+          <Col xs={12} md={6}>
+            <div className="details"></div>
+          </Col>
+
         </Row>
 
 
-        </Grid>
+      </Grid>
 
     );
 
