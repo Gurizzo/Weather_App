@@ -1,2 +1,2 @@
 # Weather_App
-Aprendiendo react2
+Aprendiendo react
